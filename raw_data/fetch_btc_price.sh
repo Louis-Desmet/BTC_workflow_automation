@@ -1,29 +1,41 @@
 #!/bin/bash
 
-# Script to fetch current Bitcoin price in USD
+# Script to fetch current Bitcoin price in USD 
 
-#Create a directory for data files if it doesn't already exist
+# Directory for data files
 DATA_DIR="BTC_RAW_DATA"
+LOG_DIR="BTC_LOGS" 
 mkdir -p "$DATA_DIR"
+mkdir -p "$LOG_DIR" 
 
-# API Endpoint for fetching Bitcoin prices
+# API
 API_ENDPOINT="https://api.coingecko.com/api/v3/simple/price"
 
-# Currency IDs and vs_currencies query parameters
+#params
 CURRENCY_IDS="bitcoin"
 VS_CURRENCIES="usd"
 
-# Generate a filename with date and time
-FILENAME="dataBTC-$(date "+%Y%m%d-%H%M%S").json"
+#filenames
+FILENAME_DATA="dataBTC-$(date "+%Y%m%d-%H%M%S").json"
+FILENAME_LOG="BTC-$(date "+%Y%m%d").log"
 
-# Full path for the new file
-FULL_PATH="${DATA_DIR}/${FILENAME}"
+# Full paths for the new files
+FULL_PATH_DATA="${DATA_DIR}/${FILENAME_DATA}"
+FULL_PATH_LOG="${LOG_DIR}/${FILENAME_LOG}"
 
-# Fetch the current price of Bitcoin in USD
-RESPONSE=$(curl -s "${API_ENDPOINT}?ids=${CURRENCY_IDS}&vs_currencies=${VS_CURRENCIES}")
+# send request
+HTTP_RESPONSE=$(curl -s -o "$FULL_PATH_DATA" -w "%{http_code}" "${API_ENDPOINT}?ids=${CURRENCY_IDS}&vs_currencies=${VS_CURRENCIES}")
 
-# Save the response in a new JSON file
-echo $RESPONSE > "$FULL_PATH"
+
+#Check the response
+if [ "$HTTP_RESPONSE" -ne 200 ]; then
+    # If the HTTP status is not 200, log the error
+    echo "$(date "+%Y-%m-%d %H:%M:%S") - Error fetching Bitcoin data. HTTP status code: $HTTP_RESPONSE" >> "$FULL_PATH_LOG"
+    
+    rm "$FULL_PATH_DATA"
+else
+    echo "$(date "+%Y-%m-%d %H:%M:%S") - Successfully fetched Bitcoin data." >> "$FULL_PATH_LOG"
+fi
 
 # Notify the user
-echo "Saved new data to ${FULL_PATH}"
+echo "Check ${FULL_PATH_LOG} for the log entry."
