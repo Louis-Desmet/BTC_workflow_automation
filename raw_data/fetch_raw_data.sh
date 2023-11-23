@@ -44,9 +44,9 @@ curl -s 'https://markets.ft.com/data' | pup 'table.mod-ui-table:first-of-type tb
 
 # Check if S&P data was successfully fetched
 if [ -s "$FULL_PATH_DATA_SP" ]; then
-    echo "$(date "+%Y-%m-%d %H:%M:%S") - Successfully fetched S&P 500 data." >> "$FULL_PATH_LOG"
+    echo "$(date "+%Y-%m-%d %H:%M:%S") - Successfully fetched stock market data." >> "$FULL_PATH_LOG"
 else
-    echo "$(date "+%Y-%m-%d %H:%M:%S") - Error fetching S&P 500 data." >> "$FULL_PATH_LOG"
+    echo "$(date "+%Y-%m-%d %H:%M:%S") - Error fetching stock market data data." >> "$FULL_PATH_LOG"
 fi
 
 # Notify the user
