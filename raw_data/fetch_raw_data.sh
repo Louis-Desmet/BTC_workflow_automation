@@ -42,7 +42,7 @@ fetch_bitcoin_data() {
 
 # Fetch stock data
 fetch_sp_data() {
-    curl -s 'https://markets.ft.com/data' | pup 'table.mod-ui-table:first-of-type tbody' > "$FULL_PATH_DATA_SP"
+    curl -s 'https://markets.ft.com/data' | /home/linuxbrew/.linuxbrew/bin/pup 'table.mod-ui-table:first-of-type tbody' > "$FULL_PATH_DATA_SP"
     if [ -s "$FULL_PATH_DATA_SP" ]; then
         log_message "Successfully fetched stock market data."
     else
