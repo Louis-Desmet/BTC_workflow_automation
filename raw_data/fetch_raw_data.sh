@@ -2,7 +2,7 @@
 
 # Directory for data files
 DATA_DIR_BTC="BTC_RAW_DATA"
-DATA_DIR_SP="S&P_RAW_DATA"
+DATA_DIR_SP="STOCK_RAW_DATA"
 LOG_DIR="RAW_DATA_LOGS" 
 mkdir -p "$DATA_DIR_BTC"
 mkdir -p "$DATA_DIR_SP"
