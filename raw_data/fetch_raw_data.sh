@@ -1,4 +1,10 @@
 #!/bin/bash
+<<<<<<< HEAD
+=======
+set -euo pipefail
+
+cd "$(dirname "$0")"
+>>>>>>> master
 
 # Directory for data files
 DATA_DIR_BTC="BTC_RAW_DATA"
@@ -24,7 +30,11 @@ FULL_PATH_DATA_BTC="${DATA_DIR_BTC}/${FILENAME_DATA_BTC}"
 FULL_PATH_DATA_SP="${DATA_DIR_SP}/${FILENAME_DATA_SP}"
 FULL_PATH_LOG="${LOG_DIR}/${FILENAME_LOG}"
 
+<<<<<<< HEAD
 # log messages
+=======
+# log
+>>>>>>> master
 log_message() {
     echo "$(date "+%Y-%m-%d %H:%M:%S") - $1" >> "$FULL_PATH_LOG"
 }
@@ -54,5 +64,8 @@ fetch_sp_data() {
 fetch_bitcoin_data
 fetch_sp_data
 
+<<<<<<< HEAD
 # Notify the user
 echo "Check ${FULL_PATH_LOG} for the log entry."
+=======
+>>>>>>> master
